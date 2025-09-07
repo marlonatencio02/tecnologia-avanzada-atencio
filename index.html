@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnología Avanzada Atencio | Soluciones Tecnológicas Innovadoras</title>
+    <meta name="description" content="Tecnología Avanzada Atencio - Líder en soluciones tecnológicas innovadoras, desarrollo de software, consultoría IT y transformación digital.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo h1 {
+            color: #2c5364;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-top: -5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c5364;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding-top: 100px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400"><rect fill="%23203a43" width="1000" height="400"/><circle fill="%2300d4ff" opacity="0.1" cx="200" cy="100" r="50"/><circle fill="%230099cc" opacity="0.1" cx="800" cy="300" r="70"/><polygon fill="%2300d4ff" opacity="0.05" points="400,50 600,150 500,250 300,200"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .service-card:hover::before {
+            animation: shine 0.5s ease-in-out;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c5364;
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TAA</div>
+                    <div>
+                        <h1>Tecnología Avanzada Atencio</h1>
+                        <div class="subtitle">Innovación Tecnológica</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" data-section="inicio" class="active">Inicio</a></li>
+                        <li><a href="#" data-section="servicios">Servicios</a></li>
+                        <li><a href="#" data-section="nosotros">Nosotros</a></li>
+                        <li><a href="#" data-section="proyectos">Proyectos</a></li>
+                        <li><a href="#" data-section="contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Transformamos Ideas en Realidad Digital</h2>
+            <p>Somos líderes en soluciones tecnológicas avanzadas, especializados en desarrollo de software, consultoría IT y transformación digital para empresas que buscan innovar.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" data-section="contacto">Cotizar Proyecto</a>
+                <a href="#" class="btn btn-secondary" data-section="servicios">Ver Servicios</a>
+            </div>
+        </section>
+
+        <section id="inicio" class="content-section active">
+            <h2>Bienvenidos a Tecnología Avanzada Atencio</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #666;">Con más de una década de experiencia, somos su socio estratégico en tecnología.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <span>Proyectos Exitosos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15+</span>
+                    <span>Años de Experiencia</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100+</span>
+                    <span>Clientes Satisfechos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span>Soporte Técnico</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; color: white; text-align: center;">
+                <h3>🚀 Próximo Evento: Tech Summit 2025</h3>
+                <p>Únete a nosotros en el evento tecnológico más importante del año. Conoce las últimas tendencias en IA, IoT y desarrollo web.</p>
+            </div>
+        </section>
+
+        <section id="servicios" class="content-section">
+            <h2>Nuestros Servicios</h2>
+            <p>Ofrecemos soluciones tecnológicas integrales para impulsar su negocio hacia el futuro digital.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desarrollo de Software</h3>
+                    <p>Aplicaciones web y móviles personalizadas con las tecnologías más avanzadas del mercado.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Consultoría IT</h3>
+                    <p>Asesoramiento experto para optimizar su infraestructura tecnológica y procesos digitales.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>Cloud Computing</h3>
+                    <p>Migración y gestión de servicios en la nube para mayor eficiencia y escalabilidad.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Ciberseguridad</h3>
+                    <p>Protección integral de sus datos y sistemas con las mejores prácticas de seguridad.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>Inteligencia Artificial</h3>
+                    <p>Implementación de IA y machine learning para automatizar y optimizar procesos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Big Data & Analytics</h3>
+                    <p>Análisis de datos avanzado para tomar decisiones empresariales más inteligentes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="content-section">
+            <h2>Sobre Nosotros</h2>
+            <div class="about-content">
+                <div>
+                    <h3>Nuestra Misión</h3>
+                    <p>Empoderar a las empresas a través de soluciones tecnológicas innovadoras que transforman sus operaciones y las preparan para el futuro digital.</p>
+                    
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser reconocidos como la empresa líder en soluciones tecnológicas avanzadas en América Latina, siendo el puente entre la tecnología y el éxito empresarial.</p>
+                    
+                    <h3>Nuestros Valores</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✅ <strong>Innovación:</strong> Constante búsqueda de nuevas tecnologías</li>
+                        <li>✅ <strong>Calidad:</strong> Excelencia en cada proyecto</li>
+                        <li>✅ <strong>Compromiso:</strong> Dedicación total con nuestros clientes</li>
+                        <li>✅ <strong>Integridad:</strong> Transparencia en todas nuestras relaciones</li>
+                    </ul>
+                </div>
+                <div style="background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 15px; padding: 2rem; color: white; text-align: center;">
+                    <h3>Certificaciones</h3>
+                    <p>🏆 ISO 9001:2015</p>
+                    <p>🏆 Microsoft Gold Partner</p>
+                    <p>🏆 AWS Advanced Consulting Partner</p>
+                    <p>🏆 Google Cloud Partner</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos" class="content-section">
+            <h2>Proyectos Destacados</h2>
+            <p>Algunos de nuestros casos de éxito más recientes:</p>
+            
+            <div class="services-grid">
+                <div class="service-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                    <div class="service-icon">🏦</div>
+                    <h3>Sistema Bancario Digital</h3>
+                    <p>Plataforma completa de banca en línea con más de 100,000 usuarios activos.</p>
+                </div>
+                <div class="service-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="service-icon">🛒</div>
+                    <h3>E-commerce Multinacional</h3>
+                    <p>Tienda online con integración a múltiples canales de venta y logística avanzada.</p>
+                </div>
+                <div class="service-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="service-icon">🏥</div>
+                    <h3>Sistema Hospitalario</h3>
+                    <p>Gestión integral de pacientes, historias clínicas y telemedicina.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="content-section">
+            <h2>Contacto</h2>
+            <p>¿Listo para transformar su empresa? Contáctenos para una consulta gratuita.</p>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Servicio de Interés</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Seleccione un servicio</option>
+                            <option value="desarrollo">Desarrollo de Software</option>
+                            <option value="consultoria">Consultoría IT</option>
+                            <option value="cloud">Cloud Computing</option>
+                            <option value="seguridad">Ciberseguridad</option>
+                            <option value="ia">Inteligencia Artificial</option>
+                            <option value="bigdata">Big Data & Analytics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje *</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntenos sobre su proyecto..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Consulta</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tecnología Avanzada Atencio</h3>
+                    <p>Transformando empresas a través de la innovación tecnológica desde 2010.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📧 morpheobtx1@gmail.com</p>
+                    <p>📞 +507 66052958</p>
+                    <p>📍 Panamá, Panamá</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <p>LinkedIn | Twitter | Facebook</p>
+                    <p>YouTube | Instagram</p>
+                </div>
+            </div>
+            <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 2rem 0;">
+            <p>&copy; 2025 Tecnología Avanzada Atencio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navegación suave
+        const navLinks = document.querySelectorAll('nav a, .cta-buttons a[data-section]');
+        const sections = document.querySelectorAll('.content-section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetSection = this.getAttribute('data-section');
+                if (targetSection) {
+                    // Actualizar navegación activa
+                    document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                    document.querySelector(`nav a[data-section="${targetSection}"]`).classList.add('active');
+                    
+                    // Mostrar sección correspondiente
+                    sections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // Scroll suave hacia arriba
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Manejo del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+            
+            // Validación básica
+            if (!data.nombre || !data.email || !data.mensaje) {
+                alert('Por favor complete todos los campos obligatorios.');
+                return;
+            }
+            
+            // Simular envío exitoso
+            alert(`¡Gracias ${data.nombre}! Hemos recibido su consulta. Un especialista se pondrá en contacto con usted en las próximas 24 horas.`);
+            this.reset();
+        });
+
+        // Efecto parallax sutil en el header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrolled = window.pageYOffset;
+            
+            if (scrolled > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animaciones de entrada para las tarjetas
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card, .stat-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Contador animado para estadísticas
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/\D/g, ''));
+                let count = 0;
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        counter.textContent = counter.textContent.replace(/\d+/, target);
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = counter.textContent.replace(/\d+/, Math.floor(count));
+                    }
+                }, 50);
+            });
+        }
+
+        // Activar contador cuando la sección sea visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) {
+            statsObserver.observe(statsGrid);
+        }
+    </script>
+</body>
+</html>
