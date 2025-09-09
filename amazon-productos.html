@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos Recomendados - Amazon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #232f3e;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff9900, #ffb84d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        /* Widget de Búsqueda */
+        .search-widget {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .search-widget h2 {
+            color: #232f3e;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        /* Carrusel de Productos */
+        .carousel-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .carousel-section h2 {
+            color: #232f3e;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        /* Grid de Productos Específicos */
+        .products-grid {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .products-grid h2 {
+            text-align: center;
+            color: #232f3e;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .product-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-color: #ff9900;
+        }
+
+        .product-item img {
+            width: 100%;
+            max-width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .product-item h3 {
+            font-size: 1.2em;
+            color: #232f3e;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .product-item .price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #B12704;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .product-item .description {
+            color: #666;
+            font-size: 0.95em;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .buy-button {
+            background: linear-gradient(45deg, #ff9900, #ffb84d);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+            font-size: 0.95em;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
+            background: linear-gradient(45deg, #ffb84d, #ff9900);
+        }
+
+        /* Banner Section */
+        .banner-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .banner-section h2 {
+            color: #232f3e;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        /* Enlaces de texto mejorados */
+        .text-links {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .text-links h2 {
+            color: #232f3e;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .amazon-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9900, #ffb84d);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+        }
+
+        .amazon-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
+            background: linear-gradient(45deg, #ffb84d, #ff9900);
+        }
+
+        /* Declaración de Afiliado */
+        .affiliate-disclosure {
+            background: linear-gradient(45deg, #232f3e, #37475a);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .affiliate-disclosure strong {
+            color: #ff9900;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-item {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛒 Productos Recomendados</h1>
+            <p>Descubre las mejores ofertas seleccionadas especialmente para ti</p>
+        </div>
+
+        <!-- Widget de Búsqueda de Amazon -->
+        <div class="search-widget">
+            <h2>🔍 Buscar en Amazon</h2>
+            <div id="amzn-assoc-ad-search-adunit"></div>
+            <script>
+            (function(w, d){
+                var s = d.createElement('script');
+                s.async = true;
+                s.src = 'https://widgets.amazon.com/widgets/q?rt=tf_sw&ServiceVersion=20070822&MarketPlace=US&ID=V20070822/US/morpheo02-20&Operation=GetAdHtml&ResponseGroup=Default&SiteStripeAdUnitId=search';
+                d.getElementsByTagName('head')[0].appendChild(s);
+            })(window, document);
+            </script>
+        </div>
+
+        <!-- Carrusel de Productos Amazon -->
+        <div class="carousel-section">
+            <h2>📱 Tecnología Recomendada</h2>
+            <script type="text/javascript">
+            amzn_assoc_placement = "adunit0";
+            amzn_assoc_search_bar = "false";
+            amzn_assoc_tracking_id = "morpheo02-20";
+            amzn_assoc_ad_mode = "search";
+            amzn_assoc_ad_type = "smart";
+            amzn_assoc_marketplace = "amazon";
+            amzn_assoc_region = "US";
+            amzn_assoc_title = "Productos de Tecnología";
+            amzn_assoc_default_search_phrase = "electronics smart devices";
+            amzn_assoc_default_category = "Electronics";
+            amzn_assoc_linkid = "12345678";
+            amzn_assoc_rows = "2";
+            </script>
+            <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+        </div>
+
+        <!-- Grid de Productos Específicos -->
+        <div class="products-grid">
+            <h2>⭐ Productos Destacados</h2>
+            <div class="grid-container">
+                <!-- Echo Dot -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SL1000_.jpg" alt="Echo Dot 5th Gen">
+                    <h3>Echo Dot (5ª Gen)</h3>
+                    <span class="price">$49.99</span>
+                    <p class="description">Altavoz inteligente con Alexa | Sonido más rico y potente</p>
+                    <a href="https://amazon.com/dp/B09B8V1LZ3?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+
+                <!-- Fire TV Stick -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/51TjJOTfslL._AC_SL1000_.jpg" alt="Fire TV Stick 4K Max">
+                    <h3>Fire TV Stick 4K Max</h3>
+                    <span class="price">$54.99</span>
+                    <p class="description">Streaming device con WiFi 6 | Experiencia 4K ultra fluida</p>
+                    <a href="https://amazon.com/dp/B08QTXZN5N?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+
+                <!-- Kindle Paperwhite -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/61YbDXkSCDL._AC_SL1000_.jpg" alt="Kindle Paperwhite">
+                    <h3>Kindle Paperwhite</h3>
+                    <span class="price">$139.99</span>
+                    <p class="description">E-reader resistente al agua | Pantalla de 6.8" sin reflejos</p>
+                    <a href="https://amazon.com/dp/B08KTZ8249?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+
+                <!-- AirPods -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg" alt="Apple AirPods">
+                    <h3>Apple AirPods (3ª Gen)</h3>
+                    <span class="price">$179.99</span>
+                    <p class="description">Audio espacial personalizado | Resistente al sudor y agua</p>
+                    <a href="https://amazon.com/dp/B0BDHWDR12?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+
+                <!-- Nintendo Switch -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/61-PblYntsL._AC_SL1500_.jpg" alt="Nintendo Switch">
+                    <h3>Nintendo Switch Console</h3>
+                    <span class="price">$299.99</span>
+                    <p class="description">Consola híbrida | Juega en casa o portátil</p>
+                    <a href="https://amazon.com/dp/B07VGRJDFY?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+
+                <!-- MacBook Air -->
+                <div class="product-item">
+                    <img src="https://m.media-amazon.com/images/I/71jG+e7roXL._AC_SL1500_.jpg" alt="MacBook Air M2">
+                    <h3>MacBook Air M2</h3>
+                    <span class="price">$1,199.99</span>
+                    <p class="description">Chip M2 | 13.6" Liquid Retina | 8GB RAM 256GB SSD</p>
+                    <a href="https://amazon.com/dp/B0B3C2R8MP?tag=morpheo02-20" class="buy-button" target="_blank">
+                        🛒 Comprar Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner de Amazon -->
+        <div class="banner-section">
+            <h2>🎯 Ofertas Especiales</h2>
+            <script type="text/javascript">
+            amzn_assoc_ad_type = "banner";
+            amzn_assoc_marketplace = "amazon";
+            amzn_assoc_region = "US";
+            amzn_assoc_placement = "assoc_banner_placement_default";
+            amzn_assoc_campaigns = "primeday";
+            amzn_assoc_banner_type = "category";
+            amzn_assoc_p = "48";
+            amzn_assoc_isresponsive = "true";
+            amzn_assoc_banner_id = "0GXQ8HRQZP6KQMZJBXR2";
+            amzn_assoc_width = "728";
+            amzn_assoc_height = "90";
+            amzn_assoc_tracking_id = "morpheo02-20";
+            amzn_assoc_linkid = "123456789";
+            </script>
+            <script src="//z-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US"></script>
+        </div>
+
+        <!-- Enlaces de Texto -->
+        <div class="text-links">
+            <h2>🔗 Enlaces Rápidos</h2>
+            <div style="text-align: center;">
+                <h3 style="color: #232f3e; margin: 20px 0;">📱 Tecnología</h3>
+                <a href="https://amazon.com/dp/B09B8V1LZ3?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🔊 Echo Dot 5ª Gen
+                </a>
+                <a href="https://amazon.com/dp/B08QTXZN5N?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    📺 Fire TV Stick 4K Max
+                </a>
+                <a href="https://amazon.com/dp/B08KTZ8249?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    📚 Kindle Paperwhite
+                </a>
+                <a href="https://amazon.com/dp/B0BDHWDR12?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🎧 Apple AirPods 3ª Gen
+                </a>
+
+                <h3 style="color: #232f3e; margin: 20px 0;">🏠 Hogar y Dormitorio</h3>
+                <a href="https://amazon.com/dp/B07D1J9K6N?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🛏️ Sábanas 100% Algodón
+                </a>
+                <a href="https://amazon.com/dp/B08FDPQFNJ?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    💤 Almohadas Memory Foam
+                </a>
+                <a href="https://amazon.com/dp/B07JPBX4Q8?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🛋️ Edredón Todo Estación
+                </a>
+                <a href="https://amazon.com/dp/B08KG5DHWW?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🤖 Robot Aspiradora
+                </a>
+
+                <h3 style="color: #232f3e; margin: 20px 0;">👶 Bebés y Niños</h3>
+                <a href="https://amazon.com/dp/B07Y2RJF8K?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🚼 Cochecito 3 en 1
+                </a>
+                <a href="https://amazon.com/dp/B07JBQK9R4?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🚗 Silla de Auto
+                </a>
+                <a href="https://amazon.com/dp/B08C5M3G6Z?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    📹 Monitor de Bebé
+                </a>
+                <a href="https://amazon.com/dp/B087CQKQN7?tag=morpheo02-20" class="amazon-link" target="_blank">
+                    🧸 Juguetes Educativos
+                </a>
+            </div>
+        </div>
+
+        <!-- Widget de Producto Individual Nativo -->
+        <div style="text-align: center; margin: 30px 0;">
+            <h2 style="color: #232f3e; margin-bottom: 20px;">💎 Producto Destacado</h2>
+            <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" 
+                    src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=morpheo02-20&marketplace=amazon&amp;region=US&placement=B09B8V1LZ3&asins=B09B8V1LZ3&linkId=LINK-ID&show_border=true&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff">
+            </iframe>
+        </div>
+
+        <!-- Declaración de Afiliado -->
+        <div class="affiliate-disclosure">
+            <p><strong>📋 Divulgación de Afiliado:</strong> Como Asociado de Amazon, gano por compras elegibles realizadas a través de los enlaces en esta página. Los precios y la disponibilidad de los productos pueden cambiar después de la publicación y no afectan el costo para el comprador.</p>
+        </div>
+    </div>
+</body>
+</html>
